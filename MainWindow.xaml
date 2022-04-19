@@ -1,0 +1,226 @@
+﻿<Window x:Class="Ekzamen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ekzamen"
+        mc:Ignorable="d"
+        Title="Магазин" Height="550" MinHeight="550" Width="1000" MinWidth="1000">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Frame x:Name="FrameMain1" 
+                   Grid.Column="1" 
+                   Grid.Row="1" 
+                   NavigationUIVisibility="Hidden"
+                   VerticalAlignment="Center"/>
+
+            <!--<TabControl Grid.Column="1" Grid.ColumnSpan="1" SelectionChanged="TabControl_SelectionChanged" Margin="0,30,0,36">
+                <TabItem Header="Магазин" x:Name="ShopTab" FontSize="16">-->
+            <ListView
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         x:Name="MaterialListView"                
+                         ItemsSource="{Binding BookList}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter
+                                        Property="HorizontalContentAlignment"
+                                        Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                                    BorderThickness="1"
+                                    BorderBrush="Black"
+                                    Background="{Binding BackgroundColor}"
+                                    CornerRadius="1">
+
+                            <Grid
+                              Margin="10"
+                              HorizontalAlignment="Stretch">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="64"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Height="128" Source="{Binding Imagess}"/>
+
+                                <StackPanel
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Orientation="Vertical">
+
+                                    <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Название:
+                                                      <TextBlock Text="{Binding Title}"  FontWeight="Normal"/>
+                                                    | Жанр:
+                                                    <TextBlock Text="{Binding Zhanr}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                    <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Автор:
+                                                    <TextBlock Text="{Binding Avtor}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                    <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Цена:
+                                                    <TextBlock Text="{Binding Cost}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                    <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Количество в магазине:
+                                                    <TextBlock Text="{Binding Kolvo_shop}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                    <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Количество на складе: 
+                                                    <TextBlock Text="{Binding Kolvo_sklad}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                    <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Описание:
+                                                    <TextBlock Text="{Binding Description}"  FontWeight="Normal"/>
+                                            </TextBlock>
+
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--</TabItem>-->
+            <!--<TabItem Header="Корзина" x:Name="Cart" FontSize="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"></ColumnDefinition>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ListBox 
+                        Name="ShoppingCart"
+                        ScrollViewer.CanContentScroll="true"
+                        VerticalAlignment="Top" 
+                        Grid.ColumnSpan="3" 
+                        ItemsSource="{Binding BookList}" 
+                        HorizontalContentAlignment="Stretch" 
+                        AlternationCount="2"
+                        SelectionChanged="ShoppingCart_SelectionChanged">
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.Resources>
+                                            <Style TargetType="{x:Type Button}">
+                                                <Setter Property="FontFamily" Value="Arial"/>
+                                                <Setter Property="FontSize" Value="12"/>
+                                            </Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="FontFamily" Value="Arial"/>
+                                            </Style>
+
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Image Height="128" Source="{Binding Imagess}"/>
+
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            Orientation="Vertical">
+
+                                            <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Название:
+                                                      <TextBlock Text="{Binding Title}"  FontWeight="Normal"/>
+                                                    | Жанр:
+                                                    <TextBlock Text="{Binding Zhanr}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                            <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Автор:
+                                                    <TextBlock Text="{Binding Avtor}"  FontWeight="Normal"/>
+                                                </TextBlock>
+
+                                            <TextBlock FontSize="14" FontWeight="Bold">
+                                                    Цена:
+                                                    <TextBlock Text="{Binding Cost}"  FontWeight="Normal"/>
+                                                </TextBlock>
+                                        </StackPanel>
+
+                                        <Grid Width="120" Grid.Row="0" Grid.Column="2">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Background="#DFA43C">
+                            <TextBlock x:Name="CartTotalHeader" Padding="5" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Итог:"></TextBlock>
+                            <TextBlock Padding="5" VerticalAlignment="Center" FontSize="18" x:Name="CartTotal" Text="{Binding cartTotal, FallbackValue= 0}"></TextBlock>
+                            -->
+            <!--<TextBlock Padding="5" VerticalAlignment="Center" FontSize="18" Text="{Binding TotalPrice, StringFormat=N2}"></TextBlock>-->
+            <!--
+                            <TextBlock Padding="5" VerticalAlignment="Center" FontSize="18" Text="₽"></TextBlock>
+                            <Button Tag="{Binding pcode}" Margin="5" Width="100" Content="Заказ" Click="Buy_Click" Name="Buy"></Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>-->
+            <!--</TabControl>-->
+        </Grid>
+
+        <StackPanel
+            Orientation="Vertical"
+            Margin="5"
+            VerticalAlignment="Bottom">
+
+            <Button
+                x:Name="AddMaterial"
+                Content="Добавить книги"
+                Click="AddBook_Click"
+                />
+
+            <Button 
+                x:Name="Exit"
+                Content="Выход"
+                
+                Click="Exit_Click" />
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>
